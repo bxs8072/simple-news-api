@@ -31,9 +31,7 @@ class NewsRouter {
         );
       } catch (error) {
         return Future.sync(
-          () => Response.badRequest(headers: {
-            "status": 500,
-          }, body: error),
+          () => Response.badRequest(body: error),
         );
       }
     });
@@ -61,9 +59,7 @@ class NewsRouter {
         );
       } catch (error) {
         return Future.sync(
-          () => Response.badRequest(headers: {
-            "status": 500,
-          }, body: error),
+          () => Response.badRequest(body: error),
         );
       }
     });
@@ -91,9 +87,7 @@ class NewsRouter {
         );
       } catch (error) {
         return Future.sync(
-          () => Response.badRequest(headers: {
-            "status": 500,
-          }, body: error),
+          () => Response.badRequest(body: error),
         );
       }
     });
