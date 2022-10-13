@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:shelf/shelf.dart';
 import 'package:shelf_router/shelf_router.dart';
 import 'package:http/http.dart' as http;
+import 'package:simple_news_api/tools/tools.dart';
 
 class NewsRouter {
   String defaultLimit = "10";
@@ -23,9 +24,25 @@ class NewsRouter {
 
       try {
         http.Response response = await http.get(Uri.parse(uri));
+
+        List<Map<String, dynamic>> articles = List<Map<String, dynamic>>.from(
+            json.decode(response.body)["articles"]);
+
+        articles.forEach((element) {
+          int contentWordCount = element["content"].toString().length;
+          element["content"].toString();
+          element.addAll({
+            "metadata": {
+              "content-word-count": contentWordCount,
+              "highest-frequency-word":
+                  getHighWordFrequency(element["content"].toString()),
+            }
+          });
+        });
+
         return Future.sync(
           () => Response.ok(
-            response.body,
+            jsonEncode({"data": articles}),
             headers: {"Cache-Control": "max-age=3600"},
           ),
         );
@@ -51,9 +68,24 @@ class NewsRouter {
 
       try {
         http.Response response = await http.get(Uri.parse(uri));
+        List<Map<String, dynamic>> articles = List<Map<String, dynamic>>.from(
+            json.decode(response.body)["articles"]);
+
+        articles.forEach((element) {
+          int contentWordCount = element["content"].toString().length;
+          element["content"].toString();
+          element.addAll({
+            "metadata": {
+              "content-word-count": contentWordCount,
+              "highest-frequency-word":
+                  getHighWordFrequency(element["content"].toString()),
+            }
+          });
+        });
+
         return Future.sync(
           () => Response.ok(
-            response.body,
+            jsonEncode({"data": articles}),
             headers: {"Cache-Control": "max-age=3600"},
           ),
         );
@@ -79,9 +111,25 @@ class NewsRouter {
 
       try {
         http.Response response = await http.get(Uri.parse(uri));
+
+        List<Map<String, dynamic>> articles = List<Map<String, dynamic>>.from(
+            json.decode(response.body)["articles"]);
+
+        articles.forEach((element) {
+          int contentWordCount = element["content"].toString().length;
+          element["content"].toString();
+          element.addAll({
+            "metadata": {
+              "content-word-count": contentWordCount,
+              "highest-frequency-word":
+                  getHighWordFrequency(element["content"].toString()),
+            }
+          });
+        });
+
         return Future.sync(
           () => Response.ok(
-            response.body,
+            jsonEncode({"data": articles}),
             headers: {"Cache-Control": "max-age=3600"},
           ),
         );
